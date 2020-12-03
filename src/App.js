@@ -1,3 +1,9 @@
+import Section from './components/Section/Section';
+
 export default function App() {
-  return <div></div>;
+  return (
+    <section>
+      <Section />
+    </section>
+  );
 }
