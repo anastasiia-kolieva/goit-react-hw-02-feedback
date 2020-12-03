@@ -1,3 +1,5 @@
+// import { Component } from 'react';
+
 import Section from './components/Section/Section';
 
 export default function App() {
@@ -7,3 +9,9 @@ export default function App() {
     </section>
   );
 }
+
+// class App extends Component{
+
+// }
+
+// export default App

@@ -4,33 +4,62 @@ import { Component } from 'react';
 import s from './Section.module.css';
 
 class Section extends Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  // метод как бубличное свойство =()={}
+  clickOnGood = event => {
+    this.setState(prevState => {
+      return {
+        good: prevState.good + 1,
+      };
+    });
+  };
+  clickOnNeutral = event => {
+    console.log('Кликнули в Neutral');
+    console.log(event.target);
+  };
+  clickOnBad = event => {
+    console.log('Кликнули в Bad');
+    console.log(event.target);
+  };
+
   render() {
     return (
       <div className={s.section}>
         <h2 className={s.title}>Please leave feedback</h2>
 
         <div className={s.buttonWrapper}>
-          <button
-            type="button"
-            className="button"
-            onClick={() => console.log('Кликнули в Good')}
-          >
+          <button type="button" className="button" onClick={this.clickOnGood}>
             Good
           </button>
           <button
             type="button"
             className="button"
-            onClick={() => console.log('Кликнули в Neutral')}
+            onClick={this.clickOnNeutral}
           >
             Neutral
           </button>
-          <button
-            type="button"
-            className="button"
-            onClick={() => console.log('Кликнули в Bad')}
-          >
+          <button type="button" className="button" onClick={this.clickOnBad}>
             Bad
           </button>
+        </div>
+
+        <div className="statisticsWrapper">
+          <h2 className="statisticsTitle">Statistics</h2>
+
+          <div>
+            <span className={s.statisticsItem}>Good:{this.state.good}</span>
+            <span className={s.statisticsItem}>
+              Neutral:{this.state.neutral}
+            </span>
+            <span className={s.statisticsItem}>Bad:{this.state.bad}</span>
+            <span className={s.statisticsItem}>Total:</span>
+            <span className={s.statisticsItem}>Positive feedback:</span>
+          </div>
         </div>
       </div>
     );
