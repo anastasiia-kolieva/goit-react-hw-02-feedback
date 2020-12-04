@@ -20,13 +20,39 @@ class App extends Component {
     this.setState(prevState => ({ [feedback]: prevState[feedback] + 1 }));
   };
 
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
+    // если total>0 тогда идёт вичисление, если меньне нуля, тогда %позитивных отзывов равен нулю
+    return total ? Math.round((good / total) * 100) : 0;
+    // Или ещё вариант:  Math.round(good / total) * 100 || 0;
+    // "||" возвращает первое истинное значение или последнее, если такое значение не найдено.
+  };
+
   render() {
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage();
     return (
       <div>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={categories}
             onLeaveFeedback={this.addFeedback}
+          />
+        </Section>
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
           />
         </Section>
       </div>
