@@ -46,6 +46,7 @@ class App extends Component {
             onLeaveFeedback={this.addFeedback}
           />
         </Section>
+
         <Section title="Statistics">
           <Statistics
             good={good}
